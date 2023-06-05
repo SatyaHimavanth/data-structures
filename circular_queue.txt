@@ -1,0 +1,106 @@
+#include<stdio.h>
+
+#define N 5
+int qu[N],fr=-1,re=-1,a;
+
+int push()
+{
+int n;
+if((re+1)%N==fr)
+printf("Queue is full!!\n");
+else
+{
+printf("Enter number : ");
+scanf("%d",&n);
+if(fr==-1 && re==-1)
+{
+fr=0;
+re=0;
+qu[re]=n;
+}
+else
+{
+re=(re+1)%N;
+qu[re]=n;
+}
+}
+}
+
+int pop()
+{
+if(fr==-1 && re==-1)
+printf("Queue is empty!!\n");
+else if(fr==re)
+{
+printf("%d\n",qu[fr]);
+fr=-1;
+re=-1;
+}
+else
+{
+printf("%d\n",qu[fr]);
+fr=(fr+1)%N;
+}
+}
+
+void display()
+{
+int i;
+if(fr==-1 && re==-1)
+printf("Queue is empty\n");
+else
+{
+printf("Elements in queue are :\n");
+if(fr<re)
+{
+for(i=fr;i<=re;i++)
+printf("%d\n",qu[i]);
+}
+else
+{
+for(i=fr;i<N;i++)
+printf("%d\n",qu[i]);
+for(i=0;i<=re;i++)
+printf("%d\n",qu[i]);
+}
+}
+}
+
+int main()
+{
+int i,b,c=1;
+printf("Enter no of elements is queue : ");
+scanf("%d",&a);
+if(a<=N)
+{
+if(a>0)
+{
+fr=0;
+printf("Enter elements\n");
+for(i=0;i<a;i++)
+{
+printf("Element %d :",i+1);
+scanf("%d",&qu[i]);
+re=i;
+}
+}
+while(c==1)
+{
+printf("Enter 1 to push, 2 to pop : ");
+scanf("%d",&b);
+switch(b)
+{
+case 1:push();
+break;
+case 2:pop();
+break;
+default:printf("Enter only given options\n");
+}
+printf("Enter 1 to continue, 2 to end :");
+scanf("%d",&c);
+}
+display();
+}
+else
+printf("Entered no of elements exced size of Queue\n");
+}

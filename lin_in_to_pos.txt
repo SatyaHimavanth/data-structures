@@ -1,0 +1,82 @@
+#include<math.h>
+#include<ctype.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+int a;
+
+struct node{
+char data;
+struct node *next;
+}*newnode,*head1=NULL,*tail1=NULL,*head2=NULL,*head3=NULL,*tail2=NULL,*tail3=NULL,*temp1,*temp2,*temp3;
+
+struct node* create(struct node *head){
+int i;
+char val;
+for(i=0;i<a;i++)
+{
+printf("Enter element %d : ",i+1);
+scanf("%c",&val);
+newnode=(struct node*)malloc(sizeof(struct node));
+newnode->next=NULL;
+newnode->data=val;
+if(head==NULL){
+head=newnode;
+tail=newnode;
+}
+else{
+tail->next=newnode;
+tail=newnode;
+}
+}
+return(head);
+}
+
+void push(){
+char num;
+printf("Enter number : ");
+scanf("%c",&num);
+newnode=(struct node*)malloc(sizeof(struct node));
+newnode->data=num;
+newnode->next=NULL;
+if(tail!=NULL){
+tail->next=newnode;
+tail=newnode;
+}
+else{
+head=newnode;
+tail=newnode;
+}
+}
+
+void pop(){
+if(head==NULL && tail==NULL)
+printf("Stack is empty!!\n");
+else if(head==tail){
+printf("element poped is :%c\n",head->data);
+head=NULL;
+tail=NULL;
+}
+else{
+temp=head;
+head=temp->next;
+printf("element poped is :%c\n",temp->data);
+}
+}
+
+void display(){
+temp=head;
+printf("remaining elements in stack are :\n");
+while(temp->next!=NULL)
+{
+printf("%c",temp->data);
+temp=temp->next;
+}
+printf("%c",temp->data);
+}
+
+void main(){
+printf("Enter number of characters/elements in infix expression :");
+scanf("%d",&a);
+printf("Enter elements one by one :\n");
+head1=create(head1);

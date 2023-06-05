@@ -1,0 +1,97 @@
+#include<stdio.h>
+#include<stdlib.h>
+int a;
+struct node{
+int data;
+struct node *next;
+}*newnode,*head=NULL,*temp,*tail=NULL;
+
+void create(){
+int num;
+printf("Enter number of elements to be entered :");
+scanf("%d",&a);
+for(int i=0;i<a;i++){
+newnode=(struct node*)malloc(sizeof(struct node));
+printf("Enter number %d :",i+1);
+scanf("%d",&num);
+newnode->data=num;
+newnode->next=NULL;
+if(head==NULL){
+head=newnode;
+tail=newnode;
+}
+else{
+tail->next=newnode;
+tail=newnode;
+}
+}
+}
+void insert(){
+int val,pos;
+newnode=(struct node*)malloc(sizeof(struct node));
+printf("Enter data to be inserted :");
+scanf("%d",&val);
+printf("Enter position to insert :");
+scanf("%d",&pos);
+newnode->data=val;
+if(pos==0){
+newnode->next=head;
+head=newnode;
+}
+else{
+temp=head;
+for(int i=0;i<pos-2;i++){
+temp=temp->next;
+}
+newnode->next=temp->next;
+temp->next=newnode;
+}
+}
+void delete(){
+int num,pos;
+printf("Enter number to delete :");
+scanf("%d",&num);
+temp=head;
+while(temp!=NULL){
+if(temp->data==num)
+break;
+temp=temp->next;
+}
+if(temp==head){
+head=temp->next;
+free(temp);
+}
+else{
+struct node *temp1;
+temp1=head;
+while(temp1->next!=temp){
+temp1=temp1->next;
+}
+if(temp==tail){
+temp1=tail;
+temp1->next=NULL;
+free(temp);
+}
+else{
+temp1->next=temp->next;
+free(temp);
+}
+}
+}
+void search(){
+
+}
+void display(){
+temp=head;
+while(temp!=NULL){
+printf("%d\n",temp->data);
+temp=temp->next;
+}
+}
+void main(){
+create();
+insert();
+display();
+delete();
+display();
+}

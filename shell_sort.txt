@@ -1,0 +1,24 @@
+#include<stdio.h>
+int shell(int a[], int n){
+int i,j,temp,in;
+for(in=n/2;in>0;in/=2){
+for(i=in;i<n;i+=1){
+temp=a[i];
+for(j=i;j>=in && a[j-in]>temp;j-=in)
+a[j]=a[j-in];
+a[j]=temp;
+}
+}
+}
+
+int main(){
+int a[100],n,i;
+printf("Enter total no of elements\n");
+scanf("%d",&n);
+printf("Enter array elements\n");
+for(i=0;i<n;i++)
+scanf("%d",&a[i]);
+shell(a,n);
+for(i=0;i<n;i++)
+printf("%d\n",a[i]);
+}

@@ -1,0 +1,73 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<ctype.h>
+#include<string.h>
+
+#define MAX 20
+int a[MAX];
+int top=-1;
+
+void push()
+{
+int ele;
+if(top == MAX-1)
+printf("Stalk overflow\n");
+else
+{
+printf("Enter element: ");
+scanf("%d",&ele);
+top=top+1;
+a[top]=ele;
+}
+}
+
+void pop()
+{
+if(top == -1)
+printf("Stalk underflow\n");
+else
+{
+printf("Poped element: %d\n",a[top]);
+top=top-1;
+}
+}
+
+void display()
+{
+int i;
+printf("remaining elements in stack are :\n");
+for(i=top;i>-1;i--)
+{
+printf("%d\n",a[i]);
+}
+}
+
+void main()
+{
+int i,b,c;
+printf("Enter number of elements : ");
+scanf("%d",&b);
+if(b<20)
+{
+for(i=0;i<b;i++)
+{
+printf("Enter %d element : ",i);
+scanf("%d",&a[i]);
+top=i;
+}
+printf("Enter 1 to push, 2 to pop : ");
+scanf("%d",&c);
+switch(c)
+{
+case 1:push();
+display();
+break;
+case 2:pop();
+display();
+break;
+default:printf("Enter only given options");
+}
+}
+else
+printf("Maximum size of stack is %d!!",MAX);
+}

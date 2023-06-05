@@ -1,0 +1,78 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define S 6
+int a;
+
+struct node{
+int data;
+struct node *next;
+}*newnode,*temp,*fr=NULL,*re=NULL;
+
+void push(){
+int num;
+newnode=(struct node*)malloc(sizeof(struct node));
+printf("Enter number : ");
+scanf("%d",&num);
+newnode->data=num;
+if(fr==NULL && re==NULL){
+fr=re=newnode;
+re->next=fr;
+}
+else{
+re->next=newnode;
+re=newnode;
+newnode->next=fr;
+}
+}
+
+void create(){
+printf("Enter number of elements :");
+scanf("%d",&a);
+int i=0;
+printf("Enter data :\n");
+while(i<a){
+push();
+i++;
+}
+}
+
+void display(){
+temp=fr;
+do{
+printf("%d\n",temp->data);
+temp=temp->next;
+}while(temp!=fr);
+}
+
+void pop(){
+if(fr==NULL && re==NULL)
+printf("Queue is empty!!\n");
+else if(fr==re){
+printf("element poped %d\n",fr->data);
+fr=re=NULL;
+}
+else{
+printf("element poped %d\n",fr->data);
+fr=fr->next;
+re->next=fr;
+}
+}
+
+void main(){
+int c,d=1;
+create();
+while(d==1){
+printf("Enter 1 to push, 2 to pop :");
+scanf("%d",&c);
+switch(c){
+case 1:push();
+break;
+case 2:pop();
+break;
+default:printf("Enter only given options\n");
+}
+printf("1 to continue, 2 to end :");
+scanf("%d",&d);
+}
+display();
+}

@@ -1,0 +1,31 @@
+Enter table size :7
+Enter data :
+Enter number :50
+Enter 1 to continue, 2 to exit :1
+Enter number :700
+Enter 1 to continue, 2 to exit :1
+Enter number :76
+Enter 1 to continue, 2 to exit :1
+Enter number :85
+Enter 1 to continue, 2 to exit :1
+Enter number :92
+Enter 1 to continue, 2 to exit :1
+Enter number :73
+Enter 1 to continue, 2 to exit :2
+Enter 1 to insert number, 2 to search, 3 to delete :1
+Enter number :101
+Enter 1 to continue, 2 to end : 1
+Enter 1 to insert number, 2 to search, 3 to delete :2
+Enter number to be searched :85
+Given number is in given data
+Enter 1 to continue, 2 to end : 1
+Enter 1 to insert number, 2 to search, 3 to delete :2
+Enter number to be searched :35
+Enter 1 to continue, 2 to end : 2
+700
+50
+85
+92
+73
+101
+76

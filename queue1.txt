@@ -1,0 +1,67 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<ctype.h>
+
+#define N 6
+int qu[N],fr=-1,re=-1,a;
+
+int push()
+{
+int n;
+if(re==N-1)
+printf("Queue is full!!\n");
+else
+{
+printf("Enter number : ");
+scanf("%d",&n);
+re++;
+qu[re]=n;
+}
+}
+
+int pop()
+{
+if(fr==re)
+printf("Queue is empty!!\n");
+else
+{
+printf("%d\n",qu[fr]);
+fr++;
+}
+}
+
+void display()
+{
+int i;
+printf("Elements in queue are :\n");
+for(i=fr;i<=re;i++)
+printf("%d\n",qu[i]);
+}
+
+int main()
+{
+int i,b;
+printf("Enter no of elements is queue : ");
+scanf("%d",&a);
+if(a>0)
+fr=0;
+for(i=0;i<a;i++)
+{
+printf("Element %d :",i+1);
+scanf("%d",&qu[i]);
+re=i;
+}
+printf("Enter 1 to push, 2 to pop : ");
+scanf("%d",&b);
+switch(b)
+{
+case 1:push();
+display();
+break;
+case 2:pop();
+display();
+break;
+default:printf("Enter only given options\n");
+}
+}

@@ -1,0 +1,152 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node{
+struct node *left_child;
+int data;
+struct node *right_child;
+};
+
+struct node* new_node(int x){
+struct node *p;
+p=malloc(sizeof(struct node));
+p->data=x;
+p->left_child=NULL;
+p->right_child=NULL;
+return p;
+}
+
+struct node* insert(struct node *root, int x){
+if(root==NULL)
+return new_node(x);
+else if(x>root->data)
+root->right_child=insert(root->right_child, x);
+else
+root->left_child=insert(root->left_child, x);
+return root;
+}
+
+struct node* find_minimum(struct node* root){
+if(root==NULL)
+return NULL;
+else if(root->left_child!=NULL)
+return find_minimum(root->left_child);
+return root;
+}
+
+void inorder(struct node *root){
+if(root!=NULL){
+inorder(root->left_child);
+printf("%d\t",root->data);
+inorder(root->right_child);
+}
+}
+
+void preorder(struct node *root){
+if(root!=NULL){
+printf("%d\t",root->data);
+preorder(root->left_child);
+preorder(root->right_child);
+}
+}
+
+void postorder(struct node *root){
+if(root!=NULL){
+postorder(root->left_child);
+postorder(root->right_child);
+printf("%d\t",root->data);
+}
+}
+
+struct node* search(struct node *root, int x){
+if(root==NULL || root->data==x)
+return root;
+else if(x>root->data)
+return search(root->right_child, x);
+else
+return search(root->left_child, x);
+}
+
+struct node* delete(struct node *root, int x){
+if(root==NULL)
+return NULL;
+if(x>root->data)
+return delete(root->right_child, x);
+else if(x<root->data)
+return delete(root->left_child, x);
+else{
+//No child
+if(root->left_child==NULL && root->right_child==NULL){
+free(root);
+return NULL;
+}
+//One child
+else if(root->left_child==NULL || root->left_child==NULL){
+struct node *temp;
+if(root->left_child==NULL)
+temp=root->right_child;
+else
+temp=root->left_child;
+free(root);
+return temp;
+}
+//Two childern
+else{
+struct node *temp = find_minimum(root->right_child);
+root->data=temp->data;
+root->right_child=delete(root->right_child, temp->data);
+}
+}
+return root;
+}
+
+int main(){
+int a,x,b,c=1;
+struct node *root;
+printf("Enter data in root node :");
+scanf("%d",&b);
+root=new_node(b);
+while(c==1){
+printf("Enter 1 to insert a node, 2 to search, 3 to inorder, 4 to preorder, 5 to postorder :");
+scanf("%d",&a);
+switch(a){
+case 1:printf("Enter number to insert :");
+scanf("%d",&b);
+root=insert(root,b);
+break;
+
+case 2:printf("Enter number to search :");
+scanf("%d",&b);
+struct node *temp;
+temp=root;
+temp=search(temp,b);
+if(temp==NULL)
+printf("Element is not found\n");
+else
+printf("Searched element %d is found.\n",temp->data);
+break;
+
+case 3:inorder(root);
+printf("\n");
+break;
+
+case 4:preorder(root);
+printf("\n");
+break;
+
+case 5:postorder(root);
+printf("\n");
+break;
+
+case 6:printf("Enter a number to delete :");
+scanf("%d",&b);
+delete(root,b);
+break;
+
+default:printf("Enter only given options\n");
+}
+printf("Enter 1 to continue, 2 to end :");
+scanf("%d",&c);
+}
+}
+//20,5,1,15,9,7,12,30,25,40,45,42
