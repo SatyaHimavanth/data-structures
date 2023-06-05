@@ -1,0 +1,51 @@
+#include<stdio.h>
+#include<ctype.h>
+#define max 20
+int top=-1;
+int a[max];
+void push(char c)
+{
+    a[++top]=c;
+}
+int pop()
+{
+    return a[top--];
+}
+int operation(int a,int b,char c)
+{
+    switch(c)
+    {
+        case '^':return (a^b);
+        case '+':return (a+b);
+        case '-':return (a-b);
+        case '*':return (a*b);
+        case '/':return (a/b);
+        case '%':return (a%b);
+    }
+}
+int main()
+{
+    char post[max],c;
+    int r,op1,op2;
+    printf("Enter the post fix Expression::");
+    scanf("%s",post);
+    int i=0;
+    while(post[i]!='\0')
+    {
+        c=post[i];
+        if(isdigit(c))
+        {
+            push(c-'0');
+        }
+        else
+        {
+            op2=pop();
+            op1=pop();
+            r=operation(op1,op2,c);
+            push(r);
+
+        }
+        i++;
+    }
+    printf("The result of the post fix Expression is::%d",a[top]);
+}

@@ -1,0 +1,90 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct slist{
+    int data;
+    struct slist *next;
+}node;
+node *top=NULL;
+void push(int x)
+{
+    node *new;
+    new=(node*)malloc(sizeof(node));
+    new->data=x;
+    new->next=NULL;
+    if(top==NULL)
+    {
+        top=new;
+    }
+    else
+    {
+        new->next=top;
+        top=new;
+    }
+}
+int pop()
+{
+    int x;
+    node *temp;
+    if(top==NULL)
+    {
+        printf("Underflow\n");
+       
+    }
+    else
+    {
+        x=top->data;
+        temp=top;
+        top=top->next;
+        free(temp);
+    }
+    return x;
+}
+void display()
+{
+    node *temp=top;
+    if(top==NULL)
+    {
+        printf("Stack has no elements found\n");
+    }
+    else
+    {
+        while(temp!=NULL)
+        {
+            printf("|%d| ",temp->data);
+            temp=temp->next;
+        }
+        printf("\n");
+    }
+}
+int main()
+{
+    int ch;
+    int x;
+    while(1){
+       printf("1.push()\n2.pop()\n3.display()\n");
+       printf("Enter the choice that you perform:: ");
+       scanf("%d",&ch);
+       switch(ch)
+       {
+           case 1:printf("Enter the Element to Add in to stack:: ");
+                  scanf("%d",&x);
+                  while(x!=-1)
+                  {
+                      push(x);
+                      printf("Enter the Element to Add in to stack:: ");
+                      scanf("%d",&x);
+                  }
+                  break;
+            case 2:x=pop();
+                   printf("Removed element is %d\n",x);
+                   break;
+            case 3:printf("The elements in the stack is\n");
+                   display();
+                   break;
+            default:printf("Re-check  your choice\n");
+       }
+    }
+   
+
+}

@@ -1,0 +1,30 @@
+
+
+Input: A graph G and a starting vertex root of G
+
+Output: Goal state. The parent links trace the shortest path back to root[8]
+
+ 1  procedure BFS(G, root) is
+ 2      let Q be a queue
+ 3      label root as explored
+ 4      Q.enqueue(root)
+ 5      while Q is not empty do
+ 6          v := Q.dequeue()
+ 7          if v is the goal then
+ 8              return v
+ 9          for all edges from v to w in G.adjacentEdges(v) do
+10              if w is not labeled as explored then
+11                  label w as explored
+12                  Q.enqueue(w)
+
+
+Approach: DFS
+
+1. Initially all vertices are marked unvisited.
+
+2. The DFS algorithm starts at a vertex u in the graph.By starting at vertex u
+   it considers the edges from u to other vertices.
+     a)If the edge leads to an already visited vertex,then backtrack to current vertex u.
+     b)If an edge leads to an unvisited vertex, then go to that vertex and start processing 
+       from that vertex. That means the new vertex becomes the current root for traversal.
+3.Follow this process until a vertices are marked visited.

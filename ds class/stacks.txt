@@ -1,0 +1,86 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define max 5
+int a[max],top=-1;
+void push(int x)
+{
+        if (top==max-1)
+        {
+                printf("Stack overflow\n");
+        }
+        else
+        {
+                a[++top]=x;
+        }
+}
+int pop()
+{
+        if (top==-1)
+        {
+                return -1;
+        }
+        else
+        {
+                return a[top--];
+        }
+}
+int peek()
+{
+        return a[top];
+}
+void display()
+{
+        int i;
+        if(top==-1)
+        {
+                printf("No list to print\n");
+        }
+        else
+        {
+                for(i=top;i>=0;i--)
+                {
+                        printf("%3d ",a[i]);
+                }
+                printf("\n");
+        }
+}
+int main()
+{
+        int ch,x,ele;
+        printf("Enter your choice\n");
+        printf("1:Push\n2:Pop\n3:Peek\n4:Display\n5:Exit\n");
+        scanf("%d",&ch);
+        while(1)
+        {
+                switch(ch)
+                {
+                        case 1: printf("Enter element to insert\n");
+                                scanf("%d",&x);
+                                push(x);
+                                break;
+                        case 2: ele=pop();
+                                if (ele==-1)
+                                {
+                                        printf("Stack underflow\n");
+                                }
+                                else
+                                {
+                                        printf("After poping the popped element is:%d\n",ele);
+                                }
+                                break;
+                        case 3: ele=peek();
+                                printf("The element at the top is:%d\n",ele);
+                                break;
+                        case 4: display();
+                                break;
+                        case 5: printf("You entered 5 so quitting program\n");
+                                exit(0);
+                        default:printf("Enter a valid choice\n");
+                              break;
+                }
+                printf("Enter your choice\n");
+                printf("1:Push\n2:Pop\n3:Peek\n4:Display\n5:Exit\n");
+                scanf("%d",&ch);
+        }
+        return 0;
+}
